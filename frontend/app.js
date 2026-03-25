@@ -488,7 +488,7 @@ downloadBtn.addEventListener("click", () => {
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
-  setTimeout(() => URL.revokeObjectURL(url), 5000);
+  setTimeout(() => URL.revokeObjectURL(url), 5050);
 });
 
 // ---- Resizable divider ----
