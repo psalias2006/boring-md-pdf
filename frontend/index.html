@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>boring md to pdf</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/easymde@2.18.0/dist/easymde.min.css">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <div class="header-left">
+      <h1>boring md to pdf</h1>
+    </div>
+    <div class="header-right">
+      <button id="theme-toggle-btn" title="Toggle dark mode" aria-label="Toggle dark mode"></button>
+      <div id="status" class="status idle"></div>
+      <button id="download-btn" disabled title="Download PDF">Download PDF</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="editor-pane">
+      <div class="pane-header">
+        <span>Markdown</span>
+        <button id="page-break-btn" title="Insert page break at cursor">Page break</button>
+      </div>
+      <div id="editor-wrap">
+        <textarea id="editor"></textarea>
+      </div>
+    </section>
+
+    <div id="divider"></div>
+
+    <section id="preview-pane">
+      <div class="pane-header">
+        <div class="tabs">
+          <button class="tab active" data-tab="preview">Preview</button>
+          <button class="tab" data-tab="settings">Settings</button>
+          <button class="tab" data-tab="css">CSS</button>
+        </div>
+        <span id="page-info"></span>
+      </div>
+
+      <div id="pdf-viewer" data-panel="preview">
+        <div id="placeholder">
+          <p>Start typing to see the PDF preview.</p>
+        </div>
+      </div>
+
+      <div id="settings-panel" class="hidden" data-panel="settings">
+        <div class="settings-section">
+          <h3>Page</h3>
+          <div class="settings-row">
+            <label>Size</label>
+            <select data-key="pageSize">
+              <option value="A4">A4</option>
+              <option value="Letter">Letter</option>
+              <option value="A3">A3</option>
+              <option value="A5">A5</option>
+            </select>
+          </div>
+          <div class="settings-row">
+            <label>Margin top / bottom</label>
+            <div class="input-pair">
+              <input type="text" data-key="marginTop" class="input-sm">
+              <input type="text" data-key="marginBottom" class="input-sm">
+            </div>
+          </div>
+          <div class="settings-row">
+            <label>Margin left / right</label>
+            <div class="input-pair">
+              <input type="text" data-key="marginLeft" class="input-sm">
+              <input type="text" data-key="marginRight" class="input-sm">
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h3>Body</h3>
+          <div class="settings-row">
+            <label>Font family</label>
+            <select data-key="bodyFont">
+              <option value='"Helvetica Neue", Helvetica, Arial, sans-serif'>Helvetica</option>
+              <option value="Georgia, serif">Georgia</option>
+              <option value='"Times New Roman", Times, serif'>Times New Roman</option>
+              <option value="Arial, sans-serif">Arial</option>
+              <option value='"Courier New", Courier, monospace'>Courier New</option>
+            </select>
+          </div>
+          <div class="settings-row">
+            <label>Font size</label>
+            <input type="text" data-key="bodyFontSize" class="input-sm">
+          </div>
+          <div class="settings-row">
+            <label>Line height</label>
+            <input type="text" data-key="bodyLineHeight" class="input-sm">
+          </div>
+          <div class="settings-row">
+            <label>Text color</label>
+            <input type="color" data-key="bodyColor">
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h3>Headings</h3>
+          <div class="settings-row">
+            <label>H1 size</label>
+            <input type="text" data-key="h1Size" class="input-sm">
+          </div>
+          <div class="settings-row">
+            <label>H2 size</label>
+            <input type="text" data-key="h2Size" class="input-sm">
+          </div>
+          <div class="settings-row">
+            <label>Heading color</label>
+            <input type="color" data-key="headingColor">
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h3>Tables</h3>
+          <div class="settings-row">
+            <label>Header background</label>
+            <input type="color" data-key="tableHeaderBg">
+          </div>
+          <div class="settings-row">
+            <label>Header text color</label>
+            <input type="color" data-key="tableHeaderColor">
+          </div>
+          <div class="settings-row">
+            <label>Border color</label>
+            <input type="color" data-key="tableBorderColor">
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h3>Code Blocks</h3>
+          <div class="settings-row">
+            <label>Background</label>
+            <input type="color" data-key="codeBlockBg">
+          </div>
+          <div class="settings-row">
+            <label>Text color</label>
+            <input type="color" data-key="codeBlockColor">
+          </div>
+          <div class="settings-row">
+            <label>Font size</label>
+            <input type="text" data-key="codeBlockFontSize" class="input-sm">
+          </div>
+        </div>
+
+        <div class="settings-footer">
+          <button id="reset-settings-btn">Reset to defaults</button>
+        </div>
+      </div>
+
+      <div id="css-wrap" class="hidden" data-panel="css">
+        <div id="css-notice" class="hidden">Custom CSS active. <button id="css-reset-link">Reset to use visual settings</button></div>
+        <textarea id="css-editor" spellcheck="false"></textarea>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/easymde@2.18.0/dist/easymde.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs" type="module"></script>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
