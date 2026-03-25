@@ -1,8 +1,13 @@
 # Yet Another Boring MD to PDF Tool
 A markdown to PDF converter than works. Write Markdown, get a PDF
 
+[![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=flat-square&logo=docker&logoColor=white)](https://www.docker.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-## Why You Care
+<img src="boring.png" alt="markdown to PDF" width="700" />
+
+## Features
 
 - **It Works:** Standard Markdown goes in, a cleanly formatted PDF comes out.
 - **Live Preview:** See the PDF as you type. Includes bidirectional scroll sync so you don't lose your place.
@@ -13,15 +18,10 @@ A markdown to PDF converter than works. Write Markdown, get a PDF
 ## Quick Start
 
 ```bash
-docker compose up --build -d
+docker run -d -p 5050:5050 --name boring-md-pdf ghcr.io/psalias2006/boring-md-pdf:latest
 ```
 Open [http://localhost:5050](http://localhost:5050).
 
-To stop the container:
-
-```bash
-docker compose down
-```
 
 ## The API
 
