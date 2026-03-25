@@ -1,3 +1,5 @@
+<div align="center">
+
 # Yet Another Boring MD to PDF Tool
 A markdown to PDF converter than works. Write Markdown, get a PDF
 
@@ -7,13 +9,7 @@ A markdown to PDF converter than works. Write Markdown, get a PDF
 
 <img src="boring.png" alt="markdown to PDF" width="700" />
 
-## Features
-
-- **It Works:** Standard Markdown goes in, a cleanly formatted PDF comes out.
-- **Live Preview:** See the PDF as you type. Includes bidirectional scroll sync so you don't lose your place.
-- **Total Style Control:** Tweak margins and fonts in the UI, or write raw CSS in the browser to override everything.
-- **REST API:** Ready to integrate into your automated pipelines.
-- **Zero Setup Hassle:** Runs entirely in a single Docker container.
+</div>
 
 ## Quick Start
 
@@ -21,6 +17,14 @@ A markdown to PDF converter than works. Write Markdown, get a PDF
 docker run -d -p 5050:5050 --name boring-md-pdf ghcr.io/psalias2006/boring-md-pdf:latest
 ```
 Open [http://localhost:5050](http://localhost:5050).
+
+## Features
+
+- **It Works:** Standard Markdown goes in, a cleanly formatted PDF comes out.
+- **Live Preview:** See the PDF as you type. Includes bidirectional scroll sync so you don't lose your place.
+- **Total Style Control:** Tweak margins and fonts in the UI, or write raw CSS in the browser to override everything.
+- **REST API:** Ready to integrate into your automated pipelines.
+- **Zero Setup Hassle:** Runs entirely in a single Docker container.
 
 
 ## The API
