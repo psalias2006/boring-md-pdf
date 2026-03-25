@@ -1,53 +1,32 @@
 # Yet Another Boring MD to PDF Tool
-
 A markdown to PDF converter than works. Write Markdown, get a PDF
 
-## Features
 
-- Browser-based markdown editor with formatting toolbar (bold, italic, headings, code, tables, etc.)
-- Live PDF preview that updates as you type
-- Bidirectional scroll sync between editor and preview
-- Page break insertion via toolbar button
-- Customizable PDF stylesheet (edit CSS directly in the browser)
-- Download the generated PDF
-- REST API for programmatic conversion
-- Runs in Docker, single container
+## Why You Care
+
+- **It Works:** Standard Markdown goes in, a cleanly formatted PDF comes out.
+- **Live Preview:** See the PDF as you type. Includes bidirectional scroll sync so you don't lose your place.
+- **Total Style Control:** Tweak margins and fonts in the UI, or write raw CSS in the browser to override everything.
+- **REST API:** Ready to integrate into your automated pipelines.
+- **Zero Setup Hassle:** Runs entirely in a single Docker container.
 
 ## Quick Start
 
 ```bash
 docker compose up --build -d
 ```
+Open [http://localhost:5050](http://localhost:5050).
 
-Open [http://localhost:5050](http://localhost:5050) in your browser.
-
-To stop:
+To stop the container:
 
 ```bash
 docker compose down
 ```
 
-## API
+## The API
 
-### Convert Markdown to PDF
-
-```
-POST /api/convert
-Content-Type: multipart/form-data
-```
-
-**Form fields:**
-
-
-| Field  | Type | Required | Description                                       |
-| ------ | ---- | -------- | ------------------------------------------------- |
-| `file` | file | yes      | A `.md` file to convert                           |
-| `css`  | text | no       | Custom CSS for the PDF (overrides default styles) |
-
-
-**Response:** `application/pdf` binary on success, JSON error on failure.
-
-**Example:**
+### 1. Convert Markdown to PDF
+Post a `.md` file, get an `application/pdf` binary back.
 
 ```bash
 curl -X POST http://localhost:5050/api/convert \
@@ -55,7 +34,7 @@ curl -X POST http://localhost:5050/api/convert \
   -o output.pdf
 ```
 
-With custom CSS:
+With Custom CSS:
 
 ```bash
 curl -X POST http://localhost:5050/api/convert \
@@ -64,54 +43,18 @@ curl -X POST http://localhost:5050/api/convert \
   -o output.pdf
 ```
 
-### Get Default CSS
-
-```
-GET /api/default-css
-```
-
-Returns the default PDF stylesheet as `text/css`. Useful as a starting point for customization.
+### 2. Get Default CSS
+Grab the baseline stylesheet to start customizing.
 
 ```bash
 curl http://localhost:5050/api/default-css
 ```
 
-## Custom PDF Styles
+## Formatting & Styles
 
-The preview pane has three tabs: **Preview**, **Settings**, and **CSS**.
+- **Page Breaks:** Use the editor's toolbar button, or type `<div class="page-break"></div>` directly in your Markdown.
+- **Styling Priority:** The web UI offers Settings for quick visual tweaks and CSS for raw code. Editing the raw CSS overrides the visual settings until you hit the reset button.
 
-**Settings** provides visual controls for the most common properties: page size, margins, fonts, colors, heading sizes, table colors, and code block styling. Changes apply immediately.
+## Under the Hood
 
-**CSS** gives full manual control over the PDF stylesheet. Editing the raw CSS overrides the visual settings. Use the reset button to go back to the visual settings defaults.
-
-## Page Breaks
-
-Insert a manual page break using the toolbar button (page icon) in the editor, or by typing directly in the markdown:
-
-```html
-<div class="page-break"></div>
-```
-
-This is standard inline HTML which markdown passes through to the PDF renderer.
-
-## Project Structure
-
-```
-boring-md-to-pdf/
-  backend/
-    app.py             Flask application
-    converter.py       Markdown to PDF conversion (markdown2 + WeasyPrint)
-    requirements.txt   Python dependencies
-  frontend/
-    index.html         Main page
-    app.js             Editor, preview, and conversion logic
-    style.css          UI styles
-  Dockerfile
-  docker-compose.yml
-```
-
-## Dependencies
-
-**Backend:** Flask, markdown2, WeasyPrint
-
-**Frontend:** EasyMDE (markdown editor), PDF.js (PDF rendering) -- loaded via CDN
+A simple Flask backend running `markdown2` and `WeasyPrint`, with a frontend powered by EasyMDE and PDF.js.
