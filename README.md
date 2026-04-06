@@ -1,6 +1,6 @@
 <div align="center">
 
-# Yet Another Boring MD to PDF Tool
+# Another Boring MD to PDF Tool
 A markdown to PDF converter that works. Write Markdown, get a PDF
 
 [![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
